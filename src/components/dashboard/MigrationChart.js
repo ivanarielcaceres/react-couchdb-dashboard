@@ -1,6 +1,7 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 import {PieChart, Pie, Cell, ResponsiveContainer, Tooltip} from 'recharts';
+import {Doughnut} from 'react-chartjs-2';
 import Avatar from 'material-ui/Avatar';
 import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
@@ -30,7 +31,6 @@ class MigrationChart extends React.Component {
           textAlign: 'center'
         }
       };
-
       return (
         <Paper style={styles.paper}>
           <span style={GlobalStyles.title}>{this.props.title}</span>
@@ -41,21 +41,7 @@ class MigrationChart extends React.Component {
 
             <div className="col-xs-12 col-sm-8 col-md-8 col-lg-8">
               <div style={styles.pieChartDiv}>
-                <ResponsiveContainer>
-                  <PieChart >
-                    <Pie
-                      innerRadius={80}
-                      outerRadius={130}
-                      data={this.props.data}
-                      fill="#8884d8"
-                      label>
-                      {
-                        this.props.data.map((item) => <Cell key={item.name} fill={item.color}/>)
-                      }
-                    </Pie>
-                    <Tooltip/>
-                  </PieChart>
-                </ResponsiveContainer>
+                  <Doughnut data={this.props.data} />
               </div>
             </div>
 
@@ -63,15 +49,10 @@ class MigrationChart extends React.Component {
               <div style={styles.legend}>
                 <div style={styles.legend}>
                   <List>
-                    {this.props.data.map((item) =>
+                    {this.props.data.labels.map((item) =>
                       <ListItem
-                        key={item.name}
-                        onTouchTap={this.onListItemSelected}
-                        leftAvatar={
-                          <Avatar icon={item.icon}
-                                  backgroundColor={item.color}/>
-                        }>
-                        {item.name}
+                        key={item}>
+                        {item}
                       </ListItem>
                     )}
                   </List>

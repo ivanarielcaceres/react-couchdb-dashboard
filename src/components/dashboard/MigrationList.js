@@ -4,7 +4,7 @@ import {List, ListItem} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
-import {pink600, cyan600, white} from 'material-ui/styles/colors';
+import {pink600, cyan600, white, teal500, red600} from 'material-ui/styles/colors';
 import {typography} from 'material-ui/styles';
 import EditorAttachFile from 'material-ui/svg-icons/editor/attach-file';
 import ImagePictureAsPdf from 'material-ui/svg-icons/image/picture-as-pdf';
@@ -52,7 +52,7 @@ class MigrationList extends React.Component {
     let render = null;
     if (this.state.items.length != 0) {
       render = <List>
-        {this.state.items.slice(0,50).map(item =>
+        {this.state.items.slice(0,150).map(item =>
           <div key={item.pageTitle}>
             <ListItem
               leftAvatar={item.isAttachment ? <Avatar icon={<EditorAttachFile />} /> : <Avatar icon={<ImagePictureAsPdf />} />}
@@ -63,7 +63,7 @@ class MigrationList extends React.Component {
                 </p>
               }
               secondaryTextLines={2}
-              rightIconButton={item.migrated? <Avatar icon={<ActionDone />} size={30} style={{marginTop: 25}} backgroundColor={cyan600}/>: <Avatar icon={<ActionErrorOutline />} size={30} style={{marginTop: 25}} backgroundColor={pink600}/>}
+              rightIconButton={item.migrated? <Avatar icon={<ActionDone />} size={30} style={{marginTop: 25}} backgroundColor={teal500}/>: <Avatar icon={<ActionErrorOutline />} size={30} style={{marginTop: 25}} backgroundColor={red600}/>}
             />
             <Divider inset={true} />
           </div>
@@ -80,7 +80,7 @@ class MigrationList extends React.Component {
       subheader: {
         fontSize: 24,
         fontWeight: typography.fontWeightLight,
-        backgroundColor: cyan600,
+        backgroundColor: teal500,
         color: white
       },outsideContainer: {
         paddingLeft: 10,

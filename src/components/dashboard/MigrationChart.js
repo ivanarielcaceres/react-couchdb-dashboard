@@ -18,51 +18,63 @@ class MigrationChart extends React.Component {
   }
 
   render() {
-      const styles = {
-        paper: {
-          minHeight: 344,
-          padding: 10
-        },
-        legend: {
-          paddingTop: 20,
-        },
-        pieChartDiv: {
-          height: 290,
-          textAlign: 'center'
-        }
-      };
-      return (
-        <Paper style={styles.paper}>
-          <span style={GlobalStyles.title}>{this.props.title}</span>
+    const styles = {
+      paper: {
+        minHeight: 344,
+        padding: 10
+      },
+      legend: {
+        paddingTop: 20,
+      },
+      pieChartDiv: {
+        height: 290,
+        textAlign: 'center'
+      }
+    };
+    const options = {
+      legend: {
+        display: false
+      }
+    }
+    console.log(this.props.data.icons)
 
-          <div style={GlobalStyles.clear}/>
+    return (
+      <Paper style={styles.paper}>
+        <span style={GlobalStyles.title}>{this.props.title}</span>
 
-          <div className="row">
+        <div style={GlobalStyles.clear}/>
 
-            <div className="col-xs-12 col-sm-8 col-md-8 col-lg-8">
-              <div style={styles.pieChartDiv}>
-                  <Doughnut data={this.props.data} />
-              </div>
+        <div className="row">
+
+          <div className="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+            <div style={styles.pieChartDiv}>
+              <Doughnut data={this.props.data}
+                options={options}/>
             </div>
+          </div>
 
-            <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+          <div className="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+            <div style={styles.legend}>
               <div style={styles.legend}>
-                <div style={styles.legend}>
-                  <List>
-                    {this.props.data.labels.map((item) =>
-                      <ListItem
-                        key={item}>
-                        {item}
-                      </ListItem>
-                    )}
-                  </List>
-                </div>
+                <List>
+                  {this.props.data.labels.map((item, i) =>
+                    <ListItem
+                      key={item}
+                      leftAvatar={
+                        <Avatar icon={this.props.data.icons[i]}
+                                backgroundColor={this.props.data.datasets[0].backgroundColor[i]}/>
+                      }>
+                      {item} ({this.props.data.datasets[0].data[i]})
+                    </ListItem>
+                  )}
+                </List>
               </div>
             </div>
           </div>
-        </Paper>
-      );
-    }
+        </div>
+      </Paper>
+    );
+  }
 }
 
 export default MigrationChart;

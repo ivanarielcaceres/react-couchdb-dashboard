@@ -23,8 +23,7 @@ class DashboardPage extends React.Component {
       files: {
         uploaded: {},
         notUploaded: {}
-      },
-      completed: 0
+      }
     };
     pouchDB.on('changed', () => this.refreshTodos())
   }
@@ -76,8 +75,15 @@ class DashboardPage extends React.Component {
     return output;
   }
 
+
   render() {
+    let actionDone = <ActionDone/>
+    let actionError = <AlertErrorOutline/>
     let filesProcess = {
+      icons: [
+        actionDone,
+        actionError
+      ],
       labels: [
         'Migrados',
         'No migrados'
@@ -96,6 +102,10 @@ class DashboardPage extends React.Component {
     };
 
     let foldersProcess = {
+      icons: [
+        actionDone,
+        actionError
+      ],
       labels: [
         'Migrados',
         'No migrados'

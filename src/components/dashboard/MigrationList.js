@@ -21,7 +21,24 @@ class MigrationList extends React.Component {
   }
 
   componentWillReceiveProps(props){
-    this.setState({items: props.data});
+    let filteredItems = props.data.filter((item) => {
+      this.setState({items: props.data, filter: props.filter});
+      if (props.filter.type == "Migrados") {
+        if (props.filter.item == "archivos") {
+          return item.migrated && !item.isAttachment;
+        } else {
+          return item.migrated && item.isAttachment;
+        }
+      } else {
+        if (props.filter.item == "anexos") {
+          return !item.migrated && item.isAttachment;
+        } else {
+          return !item.migrated && !item.isAttachment;
+        }
+      }
+    });
+    let list = filteredItems.length > 0 ? filteredItems : props.data;
+    this.setState({items: list});
   }
 
   filterList(value) {

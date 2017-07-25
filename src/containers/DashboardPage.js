@@ -9,7 +9,7 @@ import AlertErrorOutline from 'material-ui/svg-icons/alert/error-outline';
 import ActionDone from 'material-ui/svg-icons/action/done';
 import globalStyles from '../styles';
 import PouchDBService from '../services/pouchdb-service'
-const pouchDB = new PouchDBService("http://172.23.27.7:5984/centro-documentacion/")
+const pouchDB = new PouchDBService("http://172.23.27.7:5984/centro-documentacion-confluence/")
 
 class DashboardPage extends React.Component {
 
@@ -75,6 +75,9 @@ class DashboardPage extends React.Component {
     return output;
   }
 
+  filterOnLegend(item, type) {
+    this.setState({filter : {item, type}})
+  }
 
   render() {
     let actionDone = <ActionDone/>
@@ -153,17 +156,17 @@ class DashboardPage extends React.Component {
 
         <div className="row">
           <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 m-b-15 ">
-            <MigrationChart data={filesProcess} title="Archivos"/>
+            <MigrationChart data={filesProcess} title="Archivos" filterItem={this.filterOnLegend.bind(this, "archivos")}/>
           </div>
 
           <div className="col-xs-12 col-sm-12 col-md-6 col-lg-6 m-b-15 ">
-            <MigrationChart data={foldersProcess} title="Anexos"/>
+            <MigrationChart data={foldersProcess} title="Anexos" filterItem={this.filterOnLegend.bind(this, "anexos")}/>
           </div>
         </div>
 
         <div className="row">
           <div className="col-xs-24 col-sm-24 col-md-12 col-lg-12 m-b-30 ">
-            <MigrationList data={filesAndFolders}/>
+            <MigrationList data={filesAndFolders} filter={this.state.filter}/>
           </div>
         </div>
       </div>

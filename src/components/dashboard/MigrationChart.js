@@ -13,10 +13,6 @@ class MigrationChart extends React.Component {
     super(props);
   }
 
-  onListItemSelected(item) {
-    console.log(`item pressed ${item}`);
-  }
-
   render() {
     const styles = {
       paper: {
@@ -63,7 +59,8 @@ class MigrationChart extends React.Component {
                       leftAvatar={
                         <Avatar icon={this.props.data.icons[i]}
                                 backgroundColor={this.props.data.datasets[0].backgroundColor[i]}/>
-                      }>
+                      }
+                      onTouchTap={this.props.filterItem.bind(this, item)}>
                       {item} ({this.props.data.datasets[0].data[i]})
                     </ListItem>
                   )}
